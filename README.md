@@ -42,10 +42,11 @@ Each lab includes documentation, screenshots, configurations, challenges encount
 - Git
 - GitHub
 ______________________________________________________________________________________________________________________________________________________________________________________________________________________________
-Install VirtualBox for VMs
+**Install VirtualBox for VMs**
 <img width="1866" height="879" alt="image" src="https://github.com/user-attachments/assets/79ff04e6-d0f5-401e-abec-b748e552da43" />
-Download Windows 2022 Sever ISO
+**Download Windows 2022 Sever ISO**
 <img width="1773" height="624" alt="image" src="https://github.com/user-attachments/assets/20aa6799-f5d2-4c4c-b2cb-1d3f21cf64d0" />
+These are the key softwares needed for this home lab that I installed. 
 
 
 
