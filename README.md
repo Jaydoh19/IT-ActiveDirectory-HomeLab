@@ -95,15 +95,16 @@ Im looking for the IPv4 Address to be in the same range as my home subnet
 <img width="1022" height="769" alt="image" src="https://github.com/user-attachments/assets/3fbea965-0504-4392-bc70-10ac1e49de1d" />
 
 **Checking if my Chosen IP is Available to Use**
-<img width="752" height="215" alt="image" src="https://github.com/user-attachments/assets/f76bc015-1967-4b1b-bc86-6a3fe9822520" />
+<img width="746" height="205" alt="image" src="https://github.com/user-attachments/assets/ef5c71e9-64ec-4bd3-adef-a81287b50708" />
 
 **Confiure IPv4 Properties**
 Active Directory depends on DNS. DC01 must be its own DNS server.
-<img width="1021" height="766" alt="image" src="https://github.com/user-attachments/assets/e40f264d-25bf-4e20-8dcb-824771b0ffec" />
-IPv4 Address . . . . : 192.168.1.50 (Chosen IP)
-Subnet Mask . . . . : 255.255.255.0
-Default Gateway . . . . : (Router)
-DNS Servers . . . . : 192.168.1.50 (Itself)
+**IPv4 Address . . . . : 192.168.1.50 (Chosen IP)**
+**Subnet Mask . . . . : 255.255.255.0**
+**Default Gateway . . . . : (Router)**
+**DNS Servers . . . . : 192.168.1.50 (Itself)**
+<img width="1010" height="754" alt="image" src="https://github.com/user-attachments/assets/4c0a9c39-8970-4e1b-8ead-e0a5d527589a" />
+
 
 
 
