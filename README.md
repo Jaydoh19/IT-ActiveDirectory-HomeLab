@@ -75,3 +75,15 @@ I created the Domain Controller VM with Windows Sever 2022 ISO
 **Configured Network Adapter**
 <img width="772" height="500" alt="image" src="https://github.com/user-attachments/assets/f1e74d46-543f-47f9-8542-7883ae1ba5f2" />
 Changed the Network from NAT to Bridged Adapter so that it gets Real IP on my home network instead of a private network where nothing can reach it.
+______________________________________________________________________________________________________________________________________________________________________________________________________________________________
+**Install the Windows Setup and Server**
+<img width="1024" height="768" alt="VirtualBox_DC-01_04_08_2026_13_40_16 install" src="https://github.com/user-attachments/assets/f531a964-296e-4951-b483-161ac41fbd05" />
+Installed the OS onto the VM with Windows Server 2022 Standard Evaluation (Desktop Experience) with the 50 GB hard drive. As well as setting an Administrator password.
+<img width="1016" height="843" alt="image" src="https://github.com/user-attachments/assets/635f0c03-8118-46f2-9c94-345b6856bbd4" />
+
+<img width="1021" height="766" alt="image" src="https://github.com/user-attachments/assets/5da4905f-160c-4f65-a5e3-0e19ad05f9ad" />
+Now I renamed the Server in Server Manager software to DC01 (Domain Controller 1) for betting clarification and I know which server is which. After restarting the computer, the Name of the PC has been renamed properly.
+<img width="1018" height="765" alt="image" src="https://github.com/user-attachments/assets/44a6e906-00c5-4e25-905c-ffae6979b438" />
+
+
+
