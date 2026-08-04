@@ -1,130 +1,258 @@
-# IT-ActiveDirectory-HomeLab
-This repository documents my hands-on IT home lab environment as I prepare for a career in Information Technology. The goal of this lab is to develop practical experience with Windows Server administration, Active Directory, networking, system administration, virtualization, and troubleshooting by simulating a small business IT environment.
+# IT Active Directory Home Lab
 
-Each lab includes documentation, screenshots, configurations, challenges encountered, and lessons learned.
+This repository documents my hands-on Active Directory home lab built to gain practical experience with enterprise Windows administration. The lab simulates a small business network using Windows Server 2022, Active Directory, DNS, VirtualBox, and Windows 11.
 
-**Objectives**
-- Gain hands-on experience with enterprise IT technologies
-- Practice Windows Server administration
-- Learn Active Directory management
-- Configure networking services
-- Strengthen troubleshooting skills
+The objective is to strengthen my skills in system administration, networking, troubleshooting, virtualization, and Active Directory while building a portfolio that demonstrates real-world IT experience.
+
+---
+
+# Objectives
+
+- Gain hands-on experience with Windows Server administration
+- Install and configure Active Directory Domain Services (AD DS)
+- Configure DNS for a domain controller
+- Practice networking fundamentals
+- Learn virtualization using Oracle VirtualBox
 - Build an IT portfolio for employers
 
-**Technologies & Tools**
+---
 
-**Operating Systems**
+# Technologies Used
+
+## Operating Systems
+
 - Windows Server 2022 Evaluation
 - Windows 11
-- Ubuntu Linux (future labs)
+- Ubuntu Linux *(future labs)*
 
-**Virtualization**
+## Virtualization
+
 - Oracle VirtualBox
 
-**Windows Services**
+## Windows Server Roles
+
 - Active Directory Domain Services (AD DS)
 - DNS
 - Group Policy
-- DHCP (future)
+- DHCP *(future lab)*
 
-**Networking**
-- TCP/IP
+## Networking
+
 - IPv4
+- TCP/IP
 - DNS
 - Remote Desktop
 - Windows Networking
 
-**Tools**
+## Tools
+
+- Server Manager
 - PowerShell
 - Command Prompt
-- Server Manager
 - Active Directory Users and Computers
 - Git
 - GitHub
-______________________________________________________________________________________________________________________________________________________________________________________________________________________________
-**Install VirtualBox for VMs**
+
+---
+
+# Lab Architecture
+
+## Home Router
+
+- IP Address: `192.168.1.1`
+- Provides DHCP
+- Internet Gateway
+- DNS Forwarder
+
+## Domain Controller (DC01)
+
+- Windows Server 2022
+- Static IP
+- Active Directory Domain Services
+- DNS Server
+- Domain: `lab.local`
+
+## Host Computer
+
+- Windows 11
+- Oracle VirtualBox
+- Connected using a Bridged Adapter
+
+---
+
+# Lab Setup
+
+## Install Oracle VirtualBox
+
 <img width="1866" height="879" alt="image" src="https://github.com/user-attachments/assets/79ff04e6-d0f5-401e-abec-b748e552da43" />
-**Download Windows 2022 Sever ISO**
+
+Installed Oracle VirtualBox to host the Windows Server virtual machine.
+
+---
+
+## Download Windows Server 2022
+
 <img width="1773" height="624" alt="image" src="https://github.com/user-attachments/assets/20aa6799-f5d2-4c4c-b2cb-1d3f21cf64d0" />
-These are the key softwares needed for this home lab that I installed. 
-______________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
-**Network Architecture**
+Downloaded the Windows Server 2022 Evaluation ISO from Microsoft.
 
-**Wi-Fi Router (Gateway)**
-- IP: my gateway (e.g 192.168.1.1)
-- Provides DHCP to all devices
-- Handles external DNS forwarding
-- My home internet gateway
+---
 
-**DC01 - Domain Controller (VM)**
--    Static IP: e.g 192.167.1.59
--    Runs AD DS + DNS Server roles
--    Domain: lab.local
--    DNS points to itself
+## Create the Virtual Machine
 
-**Host Laptop (My Machine)**
--    Runs VirtualBox
--    Connected to same Wi-Fi
--    Gets DHCP address from router
--    Bridged networking shares the LAN
-______________________________________________________________________________________________________________________________________________________________________________________________________________________________
-**Create the VM**
-I created the Domain Controller VM with Windows Sever 2022 ISO 
 <img width="956" height="742" alt="image" src="https://github.com/user-attachments/assets/0816c171-24c4-4296-820b-836a87f0ced9" />
 
+Created a Windows Server 2022 virtual machine with:
 
-**Configured Network Adapter**
-Changed the Network from NAT to Bridged Adapter so that it gets Real IP on my home network instead of a private network where nothing can reach it.
+- 50 GB Virtual Disk
+- 4 GB RAM
+- Windows Server 2022 ISO
+
+---
+
+## Configure Networking
+
 <img width="772" height="500" alt="image" src="https://github.com/user-attachments/assets/f1e74d46-543f-47f9-8542-7883ae1ba5f2" />
-______________________________________________________________________________________________________________________________________________________________________________________________________________________________
-**Install the Windows Setup and Server**
+
+Changed the network adapter from **NAT** to **Bridged Adapter** so the virtual machine receives an IP address on my home network.
+
+---
+
+## Install Windows Server 2022
+
 <img width="1024" height="768" alt="VirtualBox_DC-01_04_08_2026_13_40_16 install" src="https://github.com/user-attachments/assets/f531a964-296e-4951-b483-161ac41fbd05" />
-Installed the OS onto the VM with Windows Server 2022 Standard Evaluation (Desktop Experience) with the 50 GB hard drive. As well as setting an Administrator password.
+
+Installed Windows Server 2022 Standard Evaluation (Desktop Experience) on the virtual machine.
+
+Configured:
+
+- Administrator password
+- 50 GB virtual disk
+
 <img width="1016" height="843" alt="image" src="https://github.com/user-attachments/assets/635f0c03-8118-46f2-9c94-345b6856bbd4" />
 
-<img width="1021" height="766" alt="image" src="https://github.com/user-attachments/assets/5da4905f-160c-4f65-a5e3-0e19ad05f9ad" />
-Now I renamed the Server in Server Manager software to DC01 (Domain Controller 1) for betting clarification and I know which server is which. After restarting the computer, the Name of the PC has been renamed properly.
+---
+
+## Rename the Server
+
 <img width="1018" height="765" alt="image" src="https://github.com/user-attachments/assets/44a6e906-00c5-4e25-905c-ffae6979b438" />
 
-**Verify Network and Ping Check**
+Renamed the server to **DC01** (Domain Controller 1) to follow standard enterprise naming conventions.
 
-**Confirm VM is on Wi-Fi LAN**
-Im looking for the IPv4 Address to be in the same range as my home subnet
-192.168.1.x
+---
+
+# Configure Networking
+
+## Verify the IP Address
+
 <img width="1022" height="769" alt="image" src="https://github.com/user-attachments/assets/3fbea965-0504-4392-bc70-10ac1e49de1d" />
 
-**Checking if my Chosen IP is Available to Use**
+Verified that the server obtained an IP address on the same subnet as my home network (`192.168.1.x`).
+
+---
+
+## Check IP Availability
+
 <img width="746" height="205" alt="image" src="https://github.com/user-attachments/assets/ef5c71e9-64ec-4bd3-adef-a81287b50708" />
 
-**Confiure IPv4 Properties**
-Active Directory depends on DNS. DC01 must be its own DNS server.
+Checked that my desired static IP address was not currently being used before assigning it to the server.
+
+---
+
+## Configure Static IPv4 Address
+
+Active Directory requires reliable DNS. The domain controller should use itself as its preferred DNS server.
+
 | Setting | Value |
-|---------|-------|
-| IPv4 Address | `192.168.1.50` (Chosen IP) |
+|----------|-------|
+| IPv4 Address | `192.168.1.50` |
 | Subnet Mask | `255.255.255.0` |
-| Default Gateway | `192.168.1.1` (Router) |
-| DNS Server | `192.168.1.50` (Itself) |
+| Default Gateway | `192.168.1.1` |
+| Preferred DNS | `192.168.1.50` |
+
 <img width="1010" height="754" alt="image" src="https://github.com/user-attachments/assets/4c0a9c39-8970-4e1b-8ead-e0a5d527589a" />
-______________________________________________________________________________________________________________________________________________________________________________________________________________________________
-**Adding the Active Directory Role**
-I added and Installed the Active Directory Domain Services (AD DS) which is the role that prvoides centralzied authentication, authorization, etc. It stores users accounts, group memberships, policies, etc. 
-Out of the Box Server Manager does nothing but adding this gives us the Active Directory Authority and tools needed to set up the netowork Permissions.
+
+---
+
+# Install Active Directory Domain Services
+
 <img width="782" height="556" alt="image" src="https://github.com/user-attachments/assets/59fdf734-41d9-47a4-9e52-e27c1e5889b4" />
+
 <img width="1019" height="729" alt="image" src="https://github.com/user-attachments/assets/93fa7ca0-6ed8-4d12-a515-29a031bf08b3" />
-______________________________________________________________________________________________________________________________________________________________________________________________________________________________
-Creating the lab.local Domain
-First I promote the server to the domain controller
+
+Installed the **Active Directory Domain Services (AD DS)** role using Server Manager.
+
+This role provides:
+
+- Centralized authentication
+- User account management
+- Security groups
+- Organizational Units (OUs)
+- Group Policy support
+- Domain administration
+
+---
+
+# Create the Active Directory Forest
+
+## Promote the Server
+
 <img width="1027" height="758" alt="image" src="https://github.com/user-attachments/assets/95e8a2d4-a8c7-4e2d-abb2-8ef8d2c11cb7" />
 
-Deploying a forest (lab.local) to the domain and setting a DSRM password.
+Promoted DC01 to a Domain Controller.
+
+---
+
+## Create the Forest
+
 <img width="1021" height="760" alt="image" src="https://github.com/user-attachments/assets/9bf64cd6-7a8d-4f6a-a95d-0b41352ba128" />
 
-DC01 is now the first domain controller in the lab.local forest. It Hosts AD DS and DNS zone for lab.local. The login screen reflects that now the domain is live by showing the LAB\Administrator.
+Created a new Active Directory forest named:
+
+```
+lab.local
+```
+
+Configured a Directory Services Restore Mode (DSRM) password.
+
+---
+
+## Verify the Domain
+
 <img width="1023" height="762" alt="image" src="https://github.com/user-attachments/assets/f4f9ea9d-2a6d-4235-a455-be6c7b1fa4b7" />
 
+After restarting, the login screen displayed:
 
+```
+LAB\Administrator
+```
 
+This confirms that the Active Directory forest was successfully created and that the server is functioning as the first Domain Controller for the `lab.local` domain.
 
+---
 
+# Skills Demonstrated
 
+- Windows Server Administration
+- Active Directory
+- DNS Configuration
+- Static IP Configuration
+- Windows Networking
+- VirtualBox
+- PowerShell
+- Server Manager
+- System Administration
+- Troubleshooting
+
+---
+
+# Future Improvements
+
+- Configure DHCP
+- Create Organizational Units
+- Create User Accounts
+- Configure Group Policy Objects (GPOs)
+- Join Windows 11 Client to the Domain
+- Configure File Shares
+- Implement Roaming Profiles
+- Configure WSUS
