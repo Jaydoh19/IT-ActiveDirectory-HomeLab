@@ -10,3 +10,34 @@ Each lab includes documentation, screenshots, configurations, challenges encount
 - Configure networking services
 - Strengthen troubleshooting skills
 - Build an IT portfolio for employers
+
+**Technologies & Tools**
+
+**Operating Systems**
+- Windows Server 2022 Evaluation
+- Windows 11
+- Ubuntu Linux (future labs)
+
+**Virtualization**
+- Oracle VirtualBox
+
+**Windows Services**
+- Active Directory Domain Services (AD DS)
+- DNS
+- Group Policy
+- DHCP (future)
+
+**Networking**
+- TCP/IP
+- IPv4
+- DNS
+- Remote Desktop
+- Windows Networking
+
+**Tools**
+- PowerShell
+- Command Prompt
+- Server Manager
+- Active Directory Users and Computers
+- Git
+- GitHub
