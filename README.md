@@ -106,7 +106,21 @@ Active Directory depends on DNS. DC01 must be its own DNS server.
 | Default Gateway | `192.168.1.1` (Router) |
 | DNS Server | `192.168.1.50` (Itself) |
 <img width="1010" height="754" alt="image" src="https://github.com/user-attachments/assets/4c0a9c39-8970-4e1b-8ead-e0a5d527589a" />
+______________________________________________________________________________________________________________________________________________________________________________________________________________________________
+**Adding the Active Directory Role**
+I added and Installed the Active Directory Domain Services (AD DS) which is the role that prvoides centralzied authentication, authorization, etc. It stores users accounts, group memberships, policies, etc. 
+Out of the Box Server Manager does nothing but adding this gives us the Active Directory Authority and tools needed to set up the netowork Permissions.
+<img width="782" height="556" alt="image" src="https://github.com/user-attachments/assets/59fdf734-41d9-47a4-9e52-e27c1e5889b4" />
+<img width="1019" height="729" alt="image" src="https://github.com/user-attachments/assets/93fa7ca0-6ed8-4d12-a515-29a031bf08b3" />
+______________________________________________________________________________________________________________________________________________________________________________________________________________________________
+**Creating the lab.local Domain**
+First I promote the server to the domain controller
+<img width="1027" height="758" alt="image" src="https://github.com/user-attachments/assets/95e8a2d4-a8c7-4e2d-abb2-8ef8d2c11cb7" />
+Deploying a forest (lab.local) to the domain and setting a DSRM password.
+<img width="1021" height="760" alt="image" src="https://github.com/user-attachments/assets/9bf64cd6-7a8d-4f6a-a95d-0b41352ba128" />
 
+DC01 is now the first domain controller in the lab.local forest. It Hosts AD DS and DNS zone for lab.local. The login screen reflects that now the domain is live by showing the LAB\Administrator.
+<img width="1023" height="762" alt="image" src="https://github.com/user-attachments/assets/f4f9ea9d-2a6d-4235-a455-be6c7b1fa4b7" />
 
 
 
