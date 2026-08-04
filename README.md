@@ -72,6 +72,7 @@ ________________________________________________________________________________
 **Create the VM**
 <img width="956" height="742" alt="image" src="https://github.com/user-attachments/assets/0816c171-24c4-4296-820b-836a87f0ced9" />
 I created the Domain Controller VM with Windows Sever 2022 ISO 
+
 **Configured Network Adapter**
 <img width="772" height="500" alt="image" src="https://github.com/user-attachments/assets/f1e74d46-543f-47f9-8542-7883ae1ba5f2" />
 Changed the Network from NAT to Bridged Adapter so that it gets Real IP on my home network instead of a private network where nothing can reach it.
