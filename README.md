@@ -113,9 +113,10 @@ Out of the Box Server Manager does nothing but adding this gives us the Active D
 <img width="782" height="556" alt="image" src="https://github.com/user-attachments/assets/59fdf734-41d9-47a4-9e52-e27c1e5889b4" />
 <img width="1019" height="729" alt="image" src="https://github.com/user-attachments/assets/93fa7ca0-6ed8-4d12-a515-29a031bf08b3" />
 ______________________________________________________________________________________________________________________________________________________________________________________________________________________________
-**Creating the lab.local Domain**
+Creating the lab.local Domain
 First I promote the server to the domain controller
 <img width="1027" height="758" alt="image" src="https://github.com/user-attachments/assets/95e8a2d4-a8c7-4e2d-abb2-8ef8d2c11cb7" />
+
 Deploying a forest (lab.local) to the domain and setting a DSRM password.
 <img width="1021" height="760" alt="image" src="https://github.com/user-attachments/assets/9bf64cd6-7a8d-4f6a-a95d-0b41352ba128" />
 
