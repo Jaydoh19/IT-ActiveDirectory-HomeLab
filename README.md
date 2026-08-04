@@ -47,8 +47,27 @@ ________________________________________________________________________________
 **Download Windows 2022 Sever ISO**
 <img width="1773" height="624" alt="image" src="https://github.com/user-attachments/assets/20aa6799-f5d2-4c4c-b2cb-1d3f21cf64d0" />
 These are the key softwares needed for this home lab that I installed. 
+______________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
+**Network Architecture**
 
+**Wi-Fi Router (Gateway)**
+- IP: my gateway (e.g 192.168.1.1)
+- Provides DHCP to all devices
+- Handles external DNS forwarding
+- My home internet gateway
+
+**DC01 - Domain Controller (VM)**
+-    Static IP: e.g 192.167.1.59
+-    Runs AD DS + DNS Server roles
+-    Domain: lab.local
+-    DNS points to itself
+
+**Host Laptop (My Machine)**
+-    Runs VirtualBox
+-    Connected to same Wi-Fi
+-    Gets DHCP address from router
+-    Bridged networking shares the LAN
 
 
 
