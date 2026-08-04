@@ -230,29 +230,3 @@ LAB\Administrator
 This confirms that the Active Directory forest was successfully created and that the server is functioning as the first Domain Controller for the `lab.local` domain.
 
 ---
-
-# Skills Demonstrated
-
-- Windows Server Administration
-- Active Directory
-- DNS Configuration
-- Static IP Configuration
-- Windows Networking
-- VirtualBox
-- PowerShell
-- Server Manager
-- System Administration
-- Troubleshooting
-
----
-
-# Future Improvements
-
-- Configure DHCP
-- Create Organizational Units
-- Create User Accounts
-- Configure Group Policy Objects (GPOs)
-- Join Windows 11 Client to the Domain
-- Configure File Shares
-- Implement Roaming Profiles
-- Configure WSUS
