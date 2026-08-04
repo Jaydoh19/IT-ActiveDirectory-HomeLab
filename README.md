@@ -70,8 +70,9 @@ ________________________________________________________________________________
 -    Bridged networking shares the LAN
 ______________________________________________________________________________________________________________________________________________________________________________________________________________________________
 **Create the VM**
-<img width="956" height="742" alt="image" src="https://github.com/user-attachments/assets/0816c171-24c4-4296-820b-836a87f0ced9" />
 I created the Domain Controller VM with Windows Sever 2022 ISO 
+<img width="956" height="742" alt="image" src="https://github.com/user-attachments/assets/0816c171-24c4-4296-820b-836a87f0ced9" />
+
 
 **Configured Network Adapter**
 Changed the Network from NAT to Bridged Adapter so that it gets Real IP on my home network instead of a private network where nothing can reach it.
@@ -85,6 +86,27 @@ Installed the OS onto the VM with Windows Server 2022 Standard Evaluation (Deskt
 <img width="1021" height="766" alt="image" src="https://github.com/user-attachments/assets/5da4905f-160c-4f65-a5e3-0e19ad05f9ad" />
 Now I renamed the Server in Server Manager software to DC01 (Domain Controller 1) for betting clarification and I know which server is which. After restarting the computer, the Name of the PC has been renamed properly.
 <img width="1018" height="765" alt="image" src="https://github.com/user-attachments/assets/44a6e906-00c5-4e25-905c-ffae6979b438" />
+
+**Verify Network and Ping Check**
+
+**Confirm VM is on Wi-Fi LAN**
+Im looking for the IPv4 Address to be in the same range as my home subnet
+192.168.1.x
+<img width="1022" height="769" alt="image" src="https://github.com/user-attachments/assets/3fbea965-0504-4392-bc70-10ac1e49de1d" />
+
+**Checking if my Chosen IP is Available to Use**
+<img width="752" height="215" alt="image" src="https://github.com/user-attachments/assets/f76bc015-1967-4b1b-bc86-6a3fe9822520" />
+
+**Confiure IPv4 Properties**
+Active Directory depends on DNS. DC01 must be its own DNS server.
+<img width="1021" height="766" alt="image" src="https://github.com/user-attachments/assets/e40f264d-25bf-4e20-8dcb-824771b0ffec" />
+IPv4 Address . . . . : 192.168.1.50 (Chosen IP)
+Subnet Mask . . . . : 255.255.255.0
+Default Gateway . . . . : (Router)
+DNS Servers . . . . : 192.168.1.50 (Itself)
+
+
+
 
 
 
