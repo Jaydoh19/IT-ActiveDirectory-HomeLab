@@ -99,10 +99,12 @@ Im looking for the IPv4 Address to be in the same range as my home subnet
 
 **Confiure IPv4 Properties**
 Active Directory depends on DNS. DC01 must be its own DNS server.
-**IPv4 Address . . . . : 192.168.1.50 (Chosen IP)**
-**Subnet Mask . . . . : 255.255.255.0**
-**Default Gateway . . . . : (Router)**
-**DNS Servers . . . . : 192.168.1.50 (Itself)**
+| Setting | Value |
+|---------|-------|
+| IPv4 Address | `192.168.1.50` (Chosen IP) |
+| Subnet Mask | `255.255.255.0` |
+| Default Gateway | `192.168.1.1` (Router) |
+| DNS Server | `192.168.1.50` (Itself) |
 <img width="1010" height="754" alt="image" src="https://github.com/user-attachments/assets/4c0a9c39-8970-4e1b-8ead-e0a5d527589a" />
 
 
