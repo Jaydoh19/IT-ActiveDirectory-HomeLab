@@ -1,8 +1,61 @@
-# IT Active Directory Home Lab
+# 🖥️ IT Active Directory Home Lab
 
-This repository documents my hands-on Active Directory home lab built to gain practical experience with enterprise Windows administration. The lab simulates a small business network using Windows Server 2022, Active Directory, DNS, VirtualBox, and Windows 11.
+**Windows Server 2022 • Active Directory • DNS • Group Policy • Oracle VirtualBox**
 
-The objective is to strengthen my skills in system administration, networking, troubleshooting, virtualization, and Active Directory while building a portfolio that demonstrates real-world IT experience.
+Enterprise Windows Administration Lab
+
+---
+
+## Project Overview
+
+This repository documents my hands-on Active Directory home lab built to gain practical experience with enterprise Windows administration. The lab simulates a small business network using Windows Server 2022, Active Directory Domain Services (AD DS), DNS, Oracle VirtualBox, and Windows 11.
+
+The goal of this project was to strengthen my understanding of Windows Server administration, networking, virtualization, and Active Directory while building practical skills commonly used in enterprise IT environments.
+
+---
+
+# Table of Contents
+
+- [Project Overview](#project-overview)
+- [Network Diagram](#network-diagram)
+- [Objectives](#objectives)
+- [Technologies Used](#technologies-used)
+- [Lab Architecture](#lab-architecture)
+- [Lab Setup](#lab-setup)
+- [Install Active Directory Domain Services](#install-active-directory-domain-services)
+- [Create the Active Directory Forest](#create-the-active-directory-forest)
+- [Configure DNS Forwarding](#configure-dns-forwarding)
+- [Configure Organizational Units](#configure-organizational-units)
+- [Create Users and Security Groups](#create-users-and-security-groups)
+- [Assign Users to Security Groups](#assign-users-to-security-groups)
+- [Configure Group Policy](#configure-group-policy)
+- [Verify Active Directory with PowerShell](#verify-active-directory-with-powershell)
+- [Skills Demonstrated](#skills-demonstrated)
+- [What I Learned](#what-i-learned)
+
+---
+
+# Network Diagram
+
+```text
+                           Internet
+                               │
+                     Home Router / Gateway
+                     192.168.1.1 (DHCP)
+                               │
+                 ─────────────────────────
+                 │                      │
+      Windows 11 Host PC         Windows Server 2022
+      Oracle VirtualBox          DC01.lab.local
+                                      │
+                 ┌─────────────────────────────────┐
+                 │ Active Directory Domain Services│
+                 │ DNS Server                      │
+                 │ Organizational Units           │
+                 │ Users & Groups                 │
+                 │ Group Policy                   │
+                 └─────────────────────────────────┘
+```
 
 ---
 
@@ -10,46 +63,43 @@ The objective is to strengthen my skills in system administration, networking, t
 
 - Gain hands-on experience with Windows Server administration
 - Install and configure Active Directory Domain Services (AD DS)
-- Configure DNS for a domain controller
-- Practice networking fundamentals
-- Learn virtualization using Oracle VirtualBox
-- Build an IT portfolio for employers
+- Configure DNS for a Domain Controller
+- Learn enterprise networking fundamentals
+- Practice virtualization using Oracle VirtualBox
+- Organize users and groups using Active Directory
+- Configure Group Policy
+- Build an IT portfolio demonstrating real-world administrative tasks
 
 ---
 
 # Technologies Used
 
 ## Operating Systems
-
 - Windows Server 2022 Evaluation
 - Windows 11
-- Ubuntu Linux *(future labs)*
+- Ubuntu Linux *(Future Labs)*
 
 ## Virtualization
-
 - Oracle VirtualBox
 
 ## Windows Server Roles
-
 - Active Directory Domain Services (AD DS)
 - DNS
 - Group Policy
-- DHCP *(future lab)*
+- DHCP *(Future Lab)*
 
 ## Networking
-
 - IPv4
 - TCP/IP
 - DNS
 - Remote Desktop
 - Windows Networking
 
-## Tools
-
+## Administration Tools
 - Server Manager
+- Active Directory Users and Computers (ADUC)
 - PowerShell
 - Command Prompt
-- Active Directory Users and Computers
 - Git
 - GitHub
 
@@ -58,175 +108,125 @@ The objective is to strengthen my skills in system administration, networking, t
 # Lab Architecture
 
 ## Home Router
-
 - IP Address: `192.168.1.1`
-- Provides DHCP
+- DHCP Server
 - Internet Gateway
 - DNS Forwarder
 
 ## Domain Controller (DC01)
-
 - Windows Server 2022
-- Static IP
+- Static IPv4 Address
 - Active Directory Domain Services
 - DNS Server
 - Domain: `lab.local`
 
-## Host Computer
-
+## Host Machine
 - Windows 11
 - Oracle VirtualBox
-- Connected using a Bridged Adapter
+- Bridged Network Adapter
 
 ---
 
 # Lab Setup
 
-## Install Oracle VirtualBox
+> **Continue here with the step-by-step screenshots from your existing README.**  
+> Keep all of your screenshots and replace each section with the expanded commentary we previously created.
 
-<img width="1866" height="879" alt="image" src="https://github.com/user-attachments/assets/79ff04e6-d0f5-401e-abec-b748e552da43" />
+Suggested sections:
 
-Installed Oracle VirtualBox to host the Windows Server virtual machine.
-
----
-
-## Download Windows Server 2022
-
-<img width="1773" height="624" alt="image" src="https://github.com/user-attachments/assets/20aa6799-f5d2-4c4c-b2cb-1d3f21cf64d0" />
-
-Downloaded the Windows Server 2022 Evaluation ISO from Microsoft.
-
----
-
-## Create the Virtual Machine
-
-<img width="956" height="742" alt="image" src="https://github.com/user-attachments/assets/0816c171-24c4-4296-820b-836a87f0ced9" />
-
-Created a Windows Server 2022 virtual machine with:
-
-- 50 GB Virtual Disk
-- 4 GB RAM
-- Windows Server 2022 ISO
-
----
-
-## Configure Networking
-
-<img width="772" height="500" alt="image" src="https://github.com/user-attachments/assets/f1e74d46-543f-47f9-8542-7883ae1ba5f2" />
-
-Changed the network adapter from **NAT** to **Bridged Adapter** so the virtual machine receives an IP address on my home network.
-
----
-
-## Install Windows Server 2022
-
-<img width="1024" height="768" alt="VirtualBox_DC-01_04_08_2026_13_40_16 install" src="https://github.com/user-attachments/assets/f531a964-296e-4951-b483-161ac41fbd05" />
-
-Installed Windows Server 2022 Standard Evaluation (Desktop Experience) on the virtual machine.
-
-Configured:
-
-- Administrator password
-- 50 GB virtual disk
-
-<img width="1016" height="843" alt="image" src="https://github.com/user-attachments/assets/635f0c03-8118-46f2-9c94-345b6856bbd4" />
-
----
-
-## Rename the Server
-
-<img width="1018" height="765" alt="image" src="https://github.com/user-attachments/assets/44a6e906-00c5-4e25-905c-ffae6979b438" />
-
-Renamed the server to **DC01** (Domain Controller 1) to follow standard enterprise naming conventions.
-
----
-
-# Configure Networking
-
-## Verify the IP Address
-
-<img width="1022" height="769" alt="image" src="https://github.com/user-attachments/assets/3fbea965-0504-4392-bc70-10ac1e49de1d" />
-
-Verified that the server obtained an IP address on the same subnet as my home network (`192.168.1.x`).
-
----
-
-## Check IP Availability
-
-<img width="746" height="205" alt="image" src="https://github.com/user-attachments/assets/ef5c71e9-64ec-4bd3-adef-a81287b50708" />
-
-Checked that my desired static IP address was not currently being used before assigning it to the server.
-
----
-
-## Configure Static IPv4 Address
-
-Active Directory requires reliable DNS. The domain controller should use itself as its preferred DNS server.
-
-| Setting | Value |
-|----------|-------|
-| IPv4 Address | `192.168.1.50` |
-| Subnet Mask | `255.255.255.0` |
-| Default Gateway | `192.168.1.1` |
-| Preferred DNS | `192.168.1.50` |
-
-<img width="1010" height="754" alt="image" src="https://github.com/user-attachments/assets/4c0a9c39-8970-4e1b-8ead-e0a5d527589a" />
+- Install Oracle VirtualBox
+- Download Windows Server 2022
+- Create the Virtual Machine
+- Configure Networking
+- Install Windows Server 2022
+- Rename the Server
+- Verify the IP Address
+- Check IP Availability
+- Configure a Static IPv4 Address
 
 ---
 
 # Install Active Directory Domain Services
 
-<img width="782" height="556" alt="image" src="https://github.com/user-attachments/assets/59fdf734-41d9-47a4-9e52-e27c1e5889b4" />
-
-<img width="1019" height="729" alt="image" src="https://github.com/user-attachments/assets/93fa7ca0-6ed8-4d12-a515-29a031bf08b3" />
-
-Installed the **Active Directory Domain Services (AD DS)** role using Server Manager.
-
-This role provides:
-
-- Centralized authentication
-- User account management
-- Security groups
-- Organizational Units (OUs)
-- Group Policy support
-- Domain administration
+Explain installing the AD DS role through Server Manager and the services it provides.
 
 ---
 
 # Create the Active Directory Forest
 
-## Promote the Server
+Include:
 
-<img width="1027" height="758" alt="image" src="https://github.com/user-attachments/assets/95e8a2d4-a8c7-4e2d-abb2-8ef8d2c11cb7" />
-
-Promoted DC01 to a Domain Controller.
-
----
-
-## Create the Forest
-
-<img width="1021" height="760" alt="image" src="https://github.com/user-attachments/assets/9bf64cd6-7a8d-4f6a-a95d-0b41352ba128" />
-
-Created a new Active Directory forest named:
-
-```
-lab.local
-```
-
-Configured a Directory Services Restore Mode (DSRM) password.
+- Promote the Server
+- Create the `lab.local` forest
+- Configure the DSRM password
+- Verify `LAB\Administrator` after reboot
 
 ---
 
-## Verify the Domain
+# Configure DNS Forwarding
 
-<img width="1023" height="762" alt="image" src="https://github.com/user-attachments/assets/f4f9ea9d-2a6d-4235-a455-be6c7b1fa4b7" />
-
-After restarting, the login screen displayed:
-
-```
-LAB\Administrator
-```
-
-This confirms that the Active Directory forest was successfully created and that the server is functioning as the first Domain Controller for the `lab.local` domain.
+Explain configuring the router as a DNS forwarder so internal DNS can resolve external internet addresses.
 
 ---
+
+# Configure Organizational Units
+
+Explain why OUs are used to organize users and apply Group Policy.
+
+---
+
+# Create Users and Security Groups
+
+Describe creating users and security groups and introduce IAM and RBAC concepts.
+
+---
+
+# Assign Users to Security Groups
+
+Explain assigning permissions through groups instead of directly to users.
+
+---
+
+# Configure Group Policy
+
+Describe opening the Default Domain Policy and its role in centralized administration.
+
+---
+
+# Verify Active Directory with PowerShell
+
+Document verification commands such as:
+
+- `Get-ADUser`
+- `Get-ADGroup`
+- `nslookup google.com`
+
+Explain what each validates.
+
+---
+
+# Skills Demonstrated
+
+- Windows Server 2022 Administration
+- Active Directory Domain Services (AD DS)
+- Active Directory Users and Computers (ADUC)
+- DNS Configuration
+- DNS Forwarders
+- Organizational Unit (OU) Management
+- User and Group Administration
+- Identity and Access Management (IAM)
+- Role-Based Access Control (RBAC)
+- Group Policy Management
+- PowerShell Administration
+- Windows Networking
+- Virtualization (Oracle VirtualBox)
+- System Administration
+- Troubleshooting
+
+---
+
+# What I Learned
+
+This lab provided hands-on experience deploying an enterprise-style Active Directory environment from the ground up. Throughout the project I configured Windows Server, networking, DNS, Active Directory, Organizational Units, users, security groups, and Group Policy while validating the environment using PowerShell.
+
+The project strengthened my understanding of Windows Server administration and reinforced best practices for identity management, DNS, and enterprise network administration.
