@@ -496,37 +496,59 @@ Most importantly, I strengthened my understanding of how Active Directory, DNS, 
 
 # Create the Windows 11 Client VM
 
+Started by Creating a new VM named CLIENT01 on Windows 10 Version.
+
+<img width="953" height="741" alt="image" src="https://github.com/user-attachments/assets/c2746140-f7bf-4a52-b91e-1a4f56227554" />
+
 ---
 
-# Configure Client Networking
+# Attach ISO & Networking
+
+Doing this so the computers can talk to each other and be on the same network, if CLIENT01 is on NAT its blocking itself off from DC01.
+
+<img width="552" height="317" alt="image" src="https://github.com/user-attachments/assets/1e7709b2-4000-4523-9c24-afd45e62a991" />
+
+<img width="947" height="633" alt="image" src="https://github.com/user-attachments/assets/611d399d-6648-4c01-b6c0-3df7864d2aee" />
 
 ---
 
 # Configure Client DNS
 
----
+After Installing windows we need to configure the DNS settings
+<img width="1014" height="768" alt="image" src="https://github.com/user-attachments/assets/c0582540-4765-40fd-9b9c-63c8a25439b5" />
 
-# Test Connectivity to the Domain Controller
+Clients goes to DC01 server instead of home router for answers.
+<img width="1021" height="764" alt="image" src="https://github.com/user-attachments/assets/92e7d20c-32c1-4dde-926a-dd5246e563e8" />
+
+Success!! (Note: On Client01 I had to disabel IPv6 because with it on it coudlnt resolve the host ip of DC01 lab.local server.)
+<img width="432" height="172" alt="image" src="https://github.com/user-attachments/assets/b51fb595-9457-40e9-9c4e-2b60dbc3d055" />
 
 ---
 
 # Join the Client to the Domain
 
+<img width="405" height="462" alt="image" src="https://github.com/user-attachments/assets/3bc34d25-ece8-4cef-9209-b978679a3594" />
+
+<img width="456" height="348" alt="image" src="https://github.com/user-attachments/assets/991e306e-debe-4099-9936-c7e8b11b23b8" />
+
+<img width="349" height="241" alt="image" src="https://github.com/user-attachments/assets/6fa10772-e8cf-4b4c-a1eb-9cf4e3c947dd" />
+
+Successfully joined CLIENT01 to the domain of lab.local ran by DC01!!
 ---
 
-# Verify the Client in Active Directory
+# Log In with a Domain User / Verification
 
----
+Trying to login as the jdoe user or Jane Doe 
+<img width="916" height="603" alt="image" src="https://github.com/user-attachments/assets/41672b21-c53f-43b2-a07c-2d565f844267" />
 
-# Log In with a Domain User
+Success!! The domain authentication works!
+<img width="996" height="715" alt="image" src="https://github.com/user-attachments/assets/10b732f7-b68d-4eae-a7a7-decd67cfa62c" />
 
----
+<img width="520" height="259" alt="image" src="https://github.com/user-attachments/assets/44b82c09-b65d-43cf-8886-51f117aa06d4" />
 
-# Verify Group Policy
 
----
-
-# Part 2 Troubleshooting
+On DC01 computer it shows CLIENT01 is in the domain and its working properly.
+<img width="811" height="572" alt="image" src="https://github.com/user-attachments/assets/0d9a262e-9a0c-42b3-aedd-46a948385e26" />
 
 ---
 
