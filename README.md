@@ -58,8 +58,18 @@ The goal of this project was to strengthen my understanding of Windows Server ad
 
 ## Part 2 - Windows Client Domain Integration
 
--  
----
+- [Part 2 Overview](#part-2-overview)
+- [Create the Windows 11 Client VM](#create-the-windows-11-client-vm)
+- [Configure Client Networking](#configure-client-networking)
+- [Configure Client DNS](#configure-client-dns)
+- [Test Connectivity to the Domain Controller](#test-connectivity-to-the-domain-controller)
+- [Join the Client to the Domain](#join-the-client-to-the-domain)
+- [Verify the Client in Active Directory](#verify-the-client-in-active-directory)
+- [Log In with a Domain User](#log-in-with-a-domain-user)
+- [Verify Group Policy](#verify-group-policy)
+- [Part 2 Troubleshooting](#part-2-troubleshooting)
+- [Part 2 Skills Demonstrated](#part-2-skills-demonstrated)
+- [Part 2 What I Learned](#part-2-what-i-learned)
 
 # Objectives
 
@@ -480,4 +490,50 @@ Throughout this lab, I installed Windows Server 2022, configured networking and 
 Most importantly, I strengthened my understanding of how Active Directory, DNS, Group Policy, and Role-Based Access Control (RBAC) work together in an enterprise environment. This project also improved my troubleshooting skills and gave me practical experience with technologies commonly used by IT support and system administrators.
 
 ---
-## Part 2: Windows Client Domain Integration
+# Part 2 Overview
+
+---
+
+# Create the Windows 11 Client VM
+
+---
+
+# Configure Client Networking
+
+---
+
+# Configure Client DNS
+
+---
+
+# Test Connectivity to the Domain Controller
+
+---
+
+# Join the Client to the Domain
+
+---
+
+# Verify the Client in Active Directory
+
+---
+
+# Log In with a Domain User
+
+---
+
+# Verify Group Policy
+
+---
+
+# Part 2 Troubleshooting
+
+---
+
+# Part 2 Skills Demonstrated
+
+---
+
+# Part 2 What I Learned
+
+---
