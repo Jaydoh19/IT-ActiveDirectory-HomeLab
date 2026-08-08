@@ -39,7 +39,7 @@ The goal of this project was to strengthen my understanding of Windows Server ad
 
 ---
 
-# Table of Contents
+## Part 1 - Active Directory Deployment
 
 - [Overview](#overview)
 - [Objectives](#objectives)
@@ -50,14 +50,15 @@ The goal of this project was to strengthen my understanding of Windows Server ad
 - [Install Active Directory Domain Services](#install-active-directory-domain-services)
 - [Create the Active Directory Forest](#create-the-active-directory-forest)
 - [Configure DNS Forwarding](#configure-dns-forwarding)
-- [Configure Organizational Units (OUs)](#configure-organizational-units-ous)
+- [Configure Organizational Units](#configure-organizational-units-ous)
 - [Create Users and Security Groups](#create-users-and-security-groups)
 - [Assign Users to Security Groups](#assign-users-to-security-groups)
 - [Configure Group Policy](#configure-group-policy)
 - [Verify Active Directory with PowerShell](#verify-active-directory-with-powershell)
-- [Skills Demonstrated](#skills-demonstrated)
-- [What I Learned](#what-i-learned)
 
+## Part 2 - Windows Client Domain Integration
+
+-  
 ---
 
 # Objectives
@@ -477,3 +478,6 @@ This project gave me hands-on experience deploying and managing a Windows Active
 Throughout this lab, I installed Windows Server 2022, configured networking and DNS, deployed Active Directory Domain Services, created Organizational Units, managed users and security groups, configured Group Policy, and verified the environment using PowerShell.
 
 Most importantly, I strengthened my understanding of how Active Directory, DNS, Group Policy, and Role-Based Access Control (RBAC) work together in an enterprise environment. This project also improved my troubleshooting skills and gave me practical experience with technologies commonly used by IT support and system administrators.
+
+---
+## Part 2: Windows Client Domain Integration
