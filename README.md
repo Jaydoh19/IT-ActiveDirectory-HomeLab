@@ -60,14 +60,10 @@ The goal of this project was to strengthen my understanding of Windows Server ad
 
 - [Part 2 Overview](#part-2-overview)
 - [Create the Windows 11 Client VM](#create-the-windows-11-client-vm)
-- [Configure Client Networking](#configure-client-networking)
+- [Attach ISO & Networking](#attach-iso--networking)
 - [Configure Client DNS](#configure-client-dns)
-- [Test Connectivity to the Domain Controller](#test-connectivity-to-the-domain-controller)
 - [Join the Client to the Domain](#join-the-client-to-the-domain)
-- [Verify the Client in Active Directory](#verify-the-client-in-active-directory)
-- [Log In with a Domain User](#log-in-with-a-domain-user)
-- [Verify Group Policy](#verify-group-policy)
-- [Part 2 Troubleshooting](#part-2-troubleshooting)
+- [Log In with a Domain User / Verification](#log-in-with-a-domain-user--verification)
 - [Part 2 Skills Demonstrated](#part-2-skills-demonstrated)
 - [Part 2 What I Learned](#part-2-what-i-learned)
 
@@ -490,72 +486,204 @@ Throughout this lab, I installed Windows Server 2022, configured networking and 
 Most importantly, I strengthened my understanding of how Active Directory, DNS, Group Policy, and Role-Based Access Control (RBAC) work together in an enterprise environment. This project also improved my troubleshooting skills and gave me practical experience with technologies commonly used by IT support and system administrators.
 
 ---
-# Part 2 Overview
+# Part 2 - Windows Client Domain Integration
+
+## Part 2 Overview
+
+After successfully deploying the `lab.local` Active Directory domain in Part 1, I expanded the lab by adding a separate Windows client machine named **CLIENT01**.
+
+The goal of Part 2 is to simulate how a workstation would connect to an Active Directory environment in a real organization.
+
+In this part of the lab, I configured CLIENT01 to communicate with DC01, configured DNS, joined the workstation to the `lab.local` domain, and successfully authenticated using an Active Directory domain account.
+
+### Lab Environment
+
+| Machine | Role |
+|---|---|
+| `DC01` | Windows Server 2022 Domain Controller |
+| `CLIENT01` | Windows Client Workstation |
+| `lab.local` | Active Directory Domain |
+| `192.168.1.50` | DC01 / DNS Server |
 
 ---
 
 # Create the Windows 11 Client VM
 
-Started by Creating a new VM named CLIENT01 on Windows 10 Version.
+Created a new virtual machine in Oracle VirtualBox named **CLIENT01** to act as a workstation in the Active Directory environment.
 
 <img width="953" height="741" alt="image" src="https://github.com/user-attachments/assets/c2746140-f7bf-4a52-b91e-1a4f56227554" />
+
+CLIENT01 provides a separate Windows environment where I can test domain connectivity, authentication, DNS, and other Active Directory services without performing those tests directly on the Domain Controller.
 
 ---
 
 # Attach ISO & Networking
 
-Doing this so the computers can talk to each other and be on the same network, if CLIENT01 is on NAT its blocking itself off from DC01.
+Attached the Windows installation ISO to CLIENT01 and configured its virtual network adapter.
 
 <img width="552" height="317" alt="image" src="https://github.com/user-attachments/assets/1e7709b2-4000-4523-9c24-afd45e62a991" />
 
+Configured CLIENT01 to use a **Bridged Adapter** instead of NAT.
+
 <img width="947" height="633" alt="image" src="https://github.com/user-attachments/assets/611d399d-6648-4c01-b6c0-3df7864d2aee" />
+
+Using a Bridged Adapter allows CLIENT01 and DC01 to exist on the same local network and communicate directly with each other.
+
+This is important because CLIENT01 needs network access to the Domain Controller in order to locate the domain, authenticate users, and access Active Directory services.
 
 ---
 
 # Configure Client DNS
 
-After Installing windows we need to configure the DNS settings
+After installing Windows, I configured the DNS settings on CLIENT01.
+
 <img width="1014" height="768" alt="image" src="https://github.com/user-attachments/assets/c0582540-4765-40fd-9b9c-63c8a25439b5" />
 
-Clients goes to DC01 server instead of home router for answers.
-<img width="1021" height="764" alt="image" src="https://github.com/user-attachments/assets/92e7d20c-32c1-4dde-926a-dd5246e563e8" />
+I configured CLIENT01 to use the Domain Controller as its preferred DNS server:
 
-Success!! (Note: On Client01 I had to disabel IPv6 because with it on it coudlnt resolve the host ip of DC01 lab.local server.)
+```text
+Preferred DNS Server: 192.168.1.50
+```
+
+<img width="897" height="671" alt="image" src="https://github.com/user-attachments/assets/cbdf6b06-d73a-4144-8a95-4b578934cdab" />
+
+This causes CLIENT01 to send DNS requests to **DC01 instead of my home router**.
+
+This is necessary because Active Directory relies heavily on DNS. DC01 hosts the DNS records that allow CLIENT01 to locate the `lab.local` domain and other Active Directory services.
+
+### DNS Troubleshooting
+
+During this step, I encountered an issue where CLIENT01 could not resolve:
+
+```text
+dc01.lab.local
+```
+
+CLIENT01 was attempting to use my ISP/router's IPv6 DNS server instead of the DNS service running on DC01.
+
+For this lab environment, I disabled IPv6 on CLIENT01 and confirmed that the client was using:
+
+```text
+192.168.1.50
+```
+
+as its DNS server.
+
+I then tested DNS resolution using:
+
+```powershell
+nslookup dc01.lab.local
+```
+
+Success!
+
 <img width="432" height="172" alt="image" src="https://github.com/user-attachments/assets/b51fb595-9457-40e9-9c4e-2b60dbc3d055" />
+
+The lookup successfully returned:
+
+```text
+Name: dc01.lab.local
+Address: 192.168.1.50
+```
+
+This confirmed that CLIENT01 could successfully communicate with the DNS service on DC01 and resolve the Domain Controller.
+
+This troubleshooting process helped reinforce how important DNS configuration is when connecting Windows clients to an Active Directory domain.
 
 ---
 
 # Join the Client to the Domain
 
+Once CLIENT01 could successfully communicate with DC01 and resolve the domain through DNS, I began the domain join process.
+
 <img width="405" height="462" alt="image" src="https://github.com/user-attachments/assets/3bc34d25-ece8-4cef-9209-b978679a3594" />
+
+Configured CLIENT01 to join:
+
+```text
+lab.local
+```
 
 <img width="456" height="348" alt="image" src="https://github.com/user-attachments/assets/991e306e-debe-4099-9936-c7e8b11b23b8" />
 
+The domain join was successful.
+
 <img width="349" height="241" alt="image" src="https://github.com/user-attachments/assets/6fa10772-e8cf-4b4c-a1eb-9cf4e3c947dd" />
 
-Successfully joined CLIENT01 to the domain of lab.local ran by DC01!!
+CLIENT01 was now successfully joined to the **lab.local** domain managed by DC01.
+
+After joining the domain, I restarted CLIENT01 so the changes could take effect.
+
 ---
 
 # Log In with a Domain User / Verification
 
-Trying to login as the jdoe user or Jane Doe 
+After joining CLIENT01 to the domain, I tested Active Directory authentication using one of the domain users I created during Part 1.
+
+I attempted to sign in using the `jdoe` domain account.
+
 <img width="916" height="603" alt="image" src="https://github.com/user-attachments/assets/41672b21-c53f-43b2-a07c-2d565f844267" />
 
-Success!! The domain authentication works!
-<img width="996" height="715" alt="image" src="https://github.com/user-attachments/assets/10b732f7-b68d-4eae-a7a7-decd67cfa62c" />
+The domain authentication was successful!
+
+<img width="880" height="631" alt="image" src="https://github.com/user-attachments/assets/3fb2dc1d-4c53-47f3-89a1-4685853099b3" />
+
+This confirmed that CLIENT01 was able to authenticate a user against Active Directory rather than using only a local Windows account.
+
+I also verified the domain information from CLIENT01.
 
 <img width="520" height="259" alt="image" src="https://github.com/user-attachments/assets/44b82c09-b65d-43cf-8886-51f117aa06d4" />
 
+Finally, I returned to **Active Directory Users and Computers (ADUC)** on DC01 to verify that CLIENT01 had been added to Active Directory.
 
-On DC01 computer it shows CLIENT01 is in the domain and its working properly.
 <img width="811" height="572" alt="image" src="https://github.com/user-attachments/assets/0d9a262e-9a0c-42b3-aedd-46a948385e26" />
+
+CLIENT01 appeared as a computer object in the domain, confirming that the workstation had been successfully integrated into the Active Directory environment.
+
+At this point, I had successfully demonstrated:
+
+```text
+CLIENT01
+    │
+    │ DNS
+    ▼
+DC01 (192.168.1.50)
+    │
+    ▼
+lab.local
+    │
+    ├── Domain Authentication
+    ├── Domain Users
+    └── CLIENT01 Computer Object
+```
 
 ---
 
 # Part 2 Skills Demonstrated
 
+During Part 2 of this lab, I gained hands-on experience with:
+
+- Windows client virtual machine deployment
+- Oracle VirtualBox networking
+- Bridged network configuration
+- Client DNS configuration
+- DNS troubleshooting
+- `nslookup`
+- Active Directory domain joins
+- Domain user authentication
+- Active Directory computer objects
+- Active Directory Users and Computers (ADUC)
+- Client-server communication
+- Windows network troubleshooting
+
 ---
 
 # Part 2 What I Learned
 
----
+Part 2 helped me understand how Windows client computers interact with an Active Directory environment.
+
+The biggest lesson was understanding the importance of **DNS in Active Directory**. CLIENT01 needed to use DC01 as its DNS server before it could properly locate and communicate with the `lab.local` domain.
+
+I also gained hands-on experience troubleshooting DNS problems, joining a workstation to a domain, authenticating with a domain account, and verifying the client computer inside Active Directory.
+
+Overall, this part of the lab helped connect what I configured on the server in Part 1 to how Active Directory is actually used by client computers in a Windows domain.
